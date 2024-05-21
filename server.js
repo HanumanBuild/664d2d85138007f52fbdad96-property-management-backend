@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const authRoutes = require('./routes/authRoutes');
+const propertyRoutes = require('./routes/propertyRoutes');
+const serviceRequestRoutes = require('./routes/serviceRequestRoutes');
 
 dotenv.config();
 
@@ -17,6 +20,10 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 app.use(express.json());
+
+app.use('/api/auth', authRoutes);
+app.use('/api/properties', propertyRoutes);
+app.use('/api/service-requests', serviceRequestRoutes);
 
 app.get('/', (req, res) => {
   res.send('Property Management Backend');
